@@ -41,8 +41,10 @@ Create a `.env` file in the root directory of your project to store environment 
 ```makefile
 POKEAPI_BERRY_URL=https://pokeapi.co/api/v2/berry/ # URL for resource of pokeapi
 CACHE_TTL=120  # Cache TTL in seconds
-CACHE_MAXSIZE=100  # Max cache size
 PORT=8080 # To open port 8080
+REDIS_HOSTNAME=your-redis-hostname # Hostname for connection of redis redis cache service
+REDIS_PORT=your-redis-port # Port for connection of redis redis cache service
+REDIS_PASSWORD=your-redis-pw # Password for connection of redis cache service
 ```
 
 ### 4. Running the Application Locally

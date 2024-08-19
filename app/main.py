@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import os
 import uvicorn
 from fastapi import FastAPI
