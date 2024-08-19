@@ -115,6 +115,10 @@ globant_python_dev_challenge/
 
 ## 10. Testing the Deployed API on Google Cloud Platform (using Google Cloud Run)
 
+This app has been already deployed to `Google Cloud Platform` using `Google Cloud Run` and `Google Cloud Build` using a CI/CD pipeline from this repository. Every direct push into the `master` branch will execute that pipeline.
+
+The code push into `master` will be only available using PRs.
+
 ### Base URL
 ```
 https://globant-python-dev-challenge-is6dceck5a-uc.a.run.app
