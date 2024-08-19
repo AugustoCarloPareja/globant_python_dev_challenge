@@ -10,6 +10,7 @@ This is a FastAPI-based Poke-berries statistics API that fetches berry growth ti
 - Deployed using Docker and can be deployed on any cloud service.
 
 ## Endpoints
+- **`GET /`**: Welcome page with a list of main endpoints.
 - **`GET /allBerryStat`**: Fetches berry growth time statistics from PokeAPI and returns them as JSON.
 - **`GET /histogram`**: Generates and returns a histogram of berry growth times as an image.
 - **`GET /view-histogram`**`: Displays the histogram in plain HTML.
@@ -23,8 +24,8 @@ This is a FastAPI-based Poke-berries statistics API that fetches berry growth ti
 ## Setup Instructions
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/your-username/pokeapi-berries-stats.git
-cd pokeapi-berries-stats
+git clone https://github.com/AugustoCarloPareja/globant_python_dev_challenge.git
+cd globant_python_dev_challenge
 ```
 
 ### 2. Install Dependencies
@@ -55,7 +56,7 @@ The API will be available at http://127.0.0.1:8080.
 
 ### 5. Accessing the API
 Once the app is running, you can access the API endpoints:
-
+- **`GET /`**: `http://127.0.0.1:8080/`
 - **`GET /allBerryStats`**: `http://127.0.0.1:8080/allBerryStats`
 - **`GET /histogram`**: `http://127.0.0.1:8080/histogram`
 - **`GET /view-histogram`**: `http://127.0.0.1:8080/view-histogram`
@@ -91,7 +92,7 @@ You can generate a histogram of berry growth times via the `/histogram` endpoint
 
 ## 9. Project Structure
 ```plaintext
-pokeapi_statistics_api/
+globant_python_dev_challenge/
 │
 ├── app/
 │   ├── main.py                     # Main FastAPI app entry point
@@ -99,15 +100,18 @@ pokeapi_statistics_api/
 │   ├── services/                   # Business logic and services
 │   ├── data_providers/             # Data fetching from PokeAPI
 │   ├── cache/                      # Caching implementation
+│   ├── models/                     # Pydantic models validation
+│   ├── static/                     # Static for .css styles.
 │
 ├── tests/                          # Unit tests
 ├── Dockerfile                      # Dockerfile for containerization
 ├── requirements.txt                # Python dependencies
 ├── README.md                       # Project documentation
 ├── .env                            # Environment variables
+├── pytest.ini                      # Pytest init path configuration
 ```
 
-## 10. Testing the Deployed API on Google Cloud Run
+## 10. Testing the Deployed API on Google Cloud Platform (using Google Cloud Run)
 
 ### Base URL
 ```
@@ -116,6 +120,10 @@ https://globant-python-dev-challenge-is6dceck5a-uc.a.run.app
 
 ### Endpoints
 You can test this following endpoints using your browser or tools like curl or Postman.
+- `GET /`: Welcome page with main endpoints.
+```
+https://globant-python-dev-challenge-is6dceck5a-uc.a.run.app/
+```
 - `GET /allBerryStats`: Fetch the statistics for all berries.
 ```
 https://globant-python-dev-challenge-is6dceck5a-uc.a.run.app/allBerryStats
