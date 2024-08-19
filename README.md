@@ -89,7 +89,7 @@ The app caches the fetched berry data for 2 minutes to avoid unnecessary API cal
 #### Histogram
 You can generate a histogram of berry growth times via the `/histogram` endpoint and view it in HTML at `/view-histogram`.
 
-## Project Structure
+## 9. Project Structure
 ```plaintext
 pokeapi_statistics_api/
 │
@@ -106,3 +106,32 @@ pokeapi_statistics_api/
 ├── README.md                       # Project documentation
 ├── .env                            # Environment variables
 ```
+
+## 10. Testing the Deployed API on Google Cloud Run
+
+### Base URL
+```
+https://globant-python-dev-challenge-is6dceck5a-uc.a.run.app
+```
+
+### Endpoints
+You can test this following endpoints using your browser or tools like curl or Postman.
+- `GET /allBerryStats`: Fetch the statistics for all berries.
+```
+https://globant-python-dev-challenge-is6dceck5a-uc.a.run.app/allBerryStats
+```
+
+- `GET /histogram`: Generate and view a histogram of berry growth times.
+```
+https://globant-python-dev-challenge-is6dceck5a-uc.a.run.app/histogram
+```
+- `GET /view-histogram`: View the histogram in an HTML page.
+```
+https://globant-python-dev-challenge-is6dceck5a-uc.a.run.app/view-histogram
+```
+- `GET /docs`: FastAPI interactive documentation.
+```
+https://globant-python-dev-challenge-is6dceck5a-uc.a.run.app/docs
+```
+## Thanks for reviewing this project!
+ You can now share this URL to let others test the deployed API! :)
