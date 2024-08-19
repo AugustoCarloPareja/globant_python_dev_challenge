@@ -1,9 +1,20 @@
+# -*- coding: utf-8 -*-
 import pytest
 from unittest.mock import patch, AsyncMock
 from app.services.berry_service import get_berry_stats
 
 @pytest.mark.asyncio
 async def test_get_berry_stats_valid_data():
+    """
+    Test the `get_berry_stats` function when valid berry data is fetched from PokeAPI.
+
+    This test mocks the cache and PokeAPI response to simulate valid berry data.
+    It ensures that:
+    - `fetch_all_berries` is called once.
+    - Cache is updated with the correct statistics.
+    - The statistics returned include correct values for berry names, growth times,
+    variance, mean, and frequency growth times.
+    """
     with patch('app.cache.cache_handler.RedisCacheHandler.get', return_value=None), \
         patch('app.cache.cache_handler.RedisCacheHandler.set', return_value=None) as mock_cache_set:
         
@@ -30,6 +41,15 @@ async def test_get_berry_stats_valid_data():
 
 @pytest.mark.asyncio
 async def test_get_berry_stats_no_data():
+    """
+    Test the `get_berry_stats` function when no berry data is available from PokeAPI.
+
+    This test mocks the cache and simulates an empty response from PokeAPI.
+    It ensures that:
+    - `fetch_all_berries` is called once.
+    - The statistics returned have no berry names, and all growth time values are set to None.
+    - Frequency growth time is an empty dictionary.
+    """
     with patch('app.cache.cache_handler.RedisCacheHandler.get', return_value=None), \
         patch('app.cache.cache_handler.RedisCacheHandler.set', return_value=None):
         
@@ -49,6 +69,14 @@ async def test_get_berry_stats_no_data():
 
 @pytest.mark.asyncio
 async def test_get_berry_stats_with_cache():
+    """
+    Test the `get_berry_stats` function when berry data is fetched from cache.
+
+    This test mocks the cache to simulate a scenario where berry statistics are retrieved from the cache.
+    It ensures that:
+    - The function returns the cached data directly without calling `fetch_all_berries`.
+    - The returned statistics match the cached data.
+    """
     cached_stats = {
         "berries_names": ["cached_cheri"],
         "min_growth_time": 1,

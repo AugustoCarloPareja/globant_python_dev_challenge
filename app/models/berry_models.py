@@ -1,7 +1,21 @@
+# -*- coding: utf-8 -*-
 from pydantic import BaseModel, ConfigDict
 from typing import List, Dict, Optional
 
 class BerryStatsResponseModel(BaseModel):
+    """
+    Data model for representing statistics of berry growth times.
+
+    Attributes:
+        berries_names (List[str]): A list of berry names.
+        min_growth_time (Optional[int]): The minimum growth time among the berries.
+        median_growth_time (Optional[float]): The median growth time.
+        max_growth_time (Optional[int]): The maximum growth time.
+        variance_growth_time (Optional[float]): The variance of the growth times.
+        mean_growth_time (Optional[float]): The mean of the growth times.
+        frequency_growth_time (Dict[int, int]): A dictionary mapping growth times to the frequency 
+            of berries having that growth time.
+    """
     berries_names: List[str] = []
     min_growth_time: Optional[int] = None
     median_growth_time: Optional[float] = None

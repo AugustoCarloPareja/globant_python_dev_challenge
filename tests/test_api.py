@@ -1,4 +1,4 @@
-
+# -*- coding: utf-8 -*-
 from fastapi.testclient import TestClient
 from unittest.mock import patch, MagicMock
 from app.main import app
@@ -8,6 +8,16 @@ client = TestClient(app)
 mock_cache = MagicMock(spec=RedisCacheHandler)
 
 def test_all_berry_stats():
+    """
+    Test the '/allBerryStats' endpoint for a valid response.
+    
+    This test mocks the `get_berry_stats` function to return a predefined set of
+    berry statistics, and verifies that the correct values are returned by the API.
+    
+    It also checks for the presence of keys like 'berries_names', 'min_growth_time',
+    'median_growth_time', 'max_growth_time', 'variance_growth_time', 'mean_growth_time', 
+    and 'frequency_growth_time' in the response, and asserts the values are as expected.
+    """
     with patch('app.cache.cache_handler.RedisCacheHandler', return_value=mock_cache):
         mock_cache.clear()
 
@@ -46,6 +56,13 @@ def test_all_berry_stats():
         assert data["frequency_growth_time"] == {"3": 1, "7": 1}
 
 def test_all_berry_stats_empty():
+    """
+    Test the '/allBerryStats' endpoint when no berry data is available.
+
+    This test mocks the `get_berry_stats` function to return an empty dataset and
+    verifies that the API responds with no berry data, and 'min_growth_time', 'max_growth_time',
+    and 'mean_growth_time' are set to `None`.
+    """
     with patch('app.cache.cache_handler.RedisCacheHandler', return_value=mock_cache):
         mock_cache.clear()
         
@@ -66,5 +83,11 @@ def test_all_berry_stats_empty():
         assert data["mean_growth_time"] is None
 
 def test_invalid_url():
+    """
+    Test that the API correctly returns a 404 error for an invalid endpoint.
+
+    This test sends a GET request to an invalid endpoint (`/invalidEndpoint`) 
+    and verifies that the API returns a 404 status code.
+    """
     response = client.get("/invalidEndpoint")
     assert response.status_code == 404

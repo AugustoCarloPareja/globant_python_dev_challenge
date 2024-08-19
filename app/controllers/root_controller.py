@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from fastapi import APIRouter
 from fastapi.responses import HTMLResponse
 
@@ -5,6 +6,17 @@ router = APIRouter()
 
 @router.get("/", response_class=HTMLResponse)
 async def root():
+    """
+    Root endpoint of the PokeAPI Berries Statistics API.
+
+    This endpoint renders a welcome HTML page that provides an overview of the API 
+    and offers links to the main endpoints. The page includes a title, description, 
+    and navigation to access the API documentation, berry growth statistics, and 
+    berry growth time histogram.
+
+    Returns:
+        HTMLResponse: A simple HTML page displaying the welcome message and links to the API endpoints.
+    """
     html_content = """
     <html>
         <head>
