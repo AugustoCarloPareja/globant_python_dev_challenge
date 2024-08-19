@@ -2,6 +2,8 @@ import os
 import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from app.controllers.root_controller import router as root_router
 from app.controllers.berry_controller import router as berry_router
 
 app = FastAPI(
@@ -18,6 +20,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.mount("/static", StaticFiles(directory="app/static"), name="static")
+app.include_router(root_router)
 app.include_router(berry_router)
 
 if __name__ == "__main__":
