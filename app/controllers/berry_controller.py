@@ -11,13 +11,13 @@ router = APIRouter()
 async def all_berry_stats():
     return await get_berry_stats()
 
-@router.get("/histogram")
+@router.get("/histogram", responses={200: {"content": {"image/png": {}}}})
 async def generate_histogram():
     stats = await get_berry_stats()
     
     growth_times = []
     for growth_time, frequency in stats['frequency_growth_time'].items():
-        growth_times.extend([growth_time] * frequency)
+        growth_times.extend([int(growth_time)] * frequency)
     
     if growth_times:
         fig, ax = plt.subplots()
