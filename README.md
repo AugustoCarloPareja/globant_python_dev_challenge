@@ -41,6 +41,7 @@ Create a `.env` file in the root directory of your project to store environment 
 POKEAPI_BERRY_URL=https://pokeapi.co/api/v2/berry/ # URL for resource of pokeapi
 CACHE_TTL=120  # Cache TTL in seconds
 CACHE_MAXSIZE=100  # Max cache size
+PORT=8080 # To open port 8080
 ```
 
 ### 4. Running the Application Locally
@@ -49,15 +50,15 @@ To run the application locally, use uvicorn:
 ```bash
 uvicorn app.main:app --reload
 
-The API will be available at http://127.0.0.1:8000.
+The API will be available at http://127.0.0.1:8080.
 ```
 
 ### 5. Accessing the API
 Once the app is running, you can access the API endpoints:
 
-- **`GET /allBerryStats`**: `http://127.0.0.1:8000/allBerryStats`
-- **`GET /histogram`**: `http://127.0.0.1:8000/histogram`
-- **`GET /view-histogram`**: `http://127.0.0.1:8000/view-histogram`
+- **`GET /allBerryStats`**: `http://127.0.0.1:8080/allBerryStats`
+- **`GET /histogram`**: `http://127.0.0.1:8080/histogram`
+- **`GET /view-histogram`**: `http://127.0.0.1:8080/view-histogram`
 
 
 ### 6. Running Tests
@@ -78,7 +79,7 @@ docker build -t pokeapi-fastapi-app .
 
 #### 7.2 Running the Docker Container
 ```bash
-docker run -p 8000:8000 pokeapi-fastapi-app
+docker run -p 8080:8080 pokeapi-fastapi-app
 ```
 
 ### 8. Additional Features
