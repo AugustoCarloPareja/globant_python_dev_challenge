@@ -5,7 +5,7 @@ This is a FastAPI-based Poke-berries statistics API that fetches berry growth ti
 ## Features
 - Fetches berry data from PokeAPI.
 - Returns statistics like min, max, mean, median, variance, and frequency of growth times.
-- Caching for 2 minutes using an in-memory cache.
+- Caching for 2 minutes using Redis.
 - Generates a histogram of berry growth times and displays it as an image in plain HTML.
 - Deployed using Docker and can be deployed on any cloud service.
 
