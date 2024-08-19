@@ -1,13 +1,16 @@
-from app.cache.cache_handler import cache
+
 from fastapi.testclient import TestClient
+from unittest.mock import patch, MagicMock
 from app.main import app
-from unittest.mock import patch
+from app.cache.cache_handler import RedisCacheHandler
 
 client = TestClient(app)
+mock_cache = MagicMock(spec=RedisCacheHandler)
 
 def test_all_berry_stats():
-    cache.clear()
-    
+    with patch('app.cache.cache_handler.RedisCacheHandler', return_value=mock_cache):
+        mock_cache.clear()
+
     with patch('app.controllers.berry_controller.get_berry_stats', return_value={
         "berries_names": ["cheri", "pecha"],
         "min_growth_time": 3,
@@ -15,19 +18,37 @@ def test_all_berry_stats():
         "max_growth_time": 7,
         "variance_growth_time": 2.0,
         "mean_growth_time": 5.0,
-        "frequency_growth_time": {3: 1, 7: 1}
+        "frequency_growth_time": {"3": 1, "7": 1}
     }):
         response = client.get("/allBerryStats")
         assert response.status_code == 200
         data = response.json()
+        
         assert "berries_names" in data
+        assert data["berries_names"] == ["cheri", "pecha"]
+        
+        assert "min_growth_time" in data
         assert data["min_growth_time"] == 3
+        
+        assert "median_growth_time" in data
         assert data["median_growth_time"] == 4.0
+        
+        assert "max_growth_time" in data
         assert data["max_growth_time"] == 7
+        
+        assert "variance_growth_time" in data
+        assert data["variance_growth_time"] == 2.0
+        
+        assert "mean_growth_time" in data
+        assert data["mean_growth_time"] == 5.0
+        
+        assert "frequency_growth_time" in data
+        assert data["frequency_growth_time"] == {"3": 1, "7": 1}
 
 def test_all_berry_stats_empty():
-    cache.clear()
-
+    with patch('app.cache.cache_handler.RedisCacheHandler', return_value=mock_cache):
+        mock_cache.clear()
+        
     with patch('app.controllers.berry_controller.get_berry_stats', return_value={
         "berries_names": [],
         "min_growth_time": None,
